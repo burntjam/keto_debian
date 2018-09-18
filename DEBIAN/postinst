@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+echo "Hello world"
+
+
+db_get keto/account_hash && account_hash="$RET"
+
+case "$1" in
+      configure)
+        KETO_CONFIG=/opt/keto/config/config.ini
+
+        cat << EOF >> $KETO_CONFIG
+base-data-dir= var/db
+# log directory
+log-file=ketod_%N.log
+# log level
+log-level=debug
+# the account hash
+account-hash=$account_hash
+# public key dir
+public-key-dir=keys/ketod/public
+# server public and private key
+server-public-key=keys/ketod/server/public_key.pem
+server-private-key=keys/ketod/server/private_key.pem
+# block chain files
+blocks=data/blocks
+transactions=data/transactions
+accounts=data/accounts
+childs=data/childs
+accounts_mapping=data/accounts_mapping
+# graph configuration
+graph_base_dir=data/graph_base_dir
+# router
+routes=data/routes
+# genesis
+#genesis_config=config/genesis.json
+# default block
+default_block=false
+block_producer_enabled=false
+# rpc peer
+rpc-peer=34.241.60.196
+EOF
+
+esac

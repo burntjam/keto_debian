@@ -1,0 +1,5 @@
+
+Template: keto/account_hash
+Type: string
+Description: Please provide the account hash for this instance:
+
