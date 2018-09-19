@@ -8,6 +8,14 @@ fi
 
 KETO_BUILD=$1
 
+mkdir -p keto/opt/keto/tmp
+mkdir -p keto/opt/keto/document_root
+mkdir -p keto/opt/keto/data
+mkdir -p keto/opt/keto/bin
+mkdir -p keto/opt/keto/log
+mkdir -p keto/opt/keto/keys
+mkdir -p keto/opt/keto/shared
+
 cp -f $KETO_BUILD/build/install/bin/* keto/opt/keto/bin/.
 cp -f $KETO_BUILD/build/install/shared/* keto/opt/keto/shared/.
 cp -rf $KETO_BUILD/build/install/keys/* keto/opt/keto/keys/.
