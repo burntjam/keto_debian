@@ -26,16 +26,18 @@ function build {
 
 
 function clean {
+    cd keto && debian/rules clean
     rm -rf keto/opt/keto/bin
     rm -rf keto/opt/keto/shared
     rm -rf keto/opt/keto/keys
     rm -rf keto/opt/keto/document_root
+    rm keto_*.deb
 }
 
 
-if [ "$1" -eq  "build" ]; then
+if [ "$1" ==  "build" ]; then
     build $2
-elif ["$1" -eq  "build" ]; then
+elif [ "$1" ==  "clean" ]; then
     clean
 else
     echo "Unrecognised parameters"
