@@ -1,6 +1,0 @@
-Package: keto
-Version: 0.0.1
-Maintainer: BurntJam
-Architecture: all
-Description: Keto Coin
-Depends:${shlibs:Depends}

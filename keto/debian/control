@@ -1,0 +1,16 @@
+Source: keto
+Section: unknown
+Priority: optional
+Maintainer: brett.chaldecott@gmail.com
+Build-Depends: debhelper (>=10)
+Standards-Version: 0.0.1
+Homepage: https://keto-coin.io
+
+Package: keto
+Version: 0.0.1
+Maintainer: BurntJam
+Architecture: all
+Description: Keto Coin
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks:
+Provides: keto
