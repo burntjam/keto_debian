@@ -35,7 +35,7 @@ function build {
     mv -f keto_${KETO_VERSION}_all.deb $KETO_VERSION
     mv -f keto_shared_$KETO_VERSION.tar.gz $KETO_VERSION
 
-    s3cmd --recursive put $KETO_VERSION s3://keto-release/
+    s3cmd --acl-public --recursive put $KETO_VERSION s3://keto-release/
 }
 
 
