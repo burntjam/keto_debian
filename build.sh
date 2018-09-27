@@ -22,6 +22,7 @@ function build {
     sed "s/VERSION_TAG/$KETO_VERSION/g" keto/resources/debian/changelog > keto/debian/changelog
     sed -i "s/DATE_TAG/$KETO_DATE/g" keto/debian/changelog
     echo "$KETO_VERSION" > keto/opt/keto/config/keto_version
+    echo "1" > keto/opt/keto/config/auto_upgrade
 
     cp -f $KETO_BUILD/build/install/bin/* keto/opt/keto/bin/.
     cp -f $KETO_BUILD/build/install/shared/* keto/opt/keto/shared/.
