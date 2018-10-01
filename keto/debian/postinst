@@ -43,6 +43,9 @@ default_block=false
 block_producer_enabled=false
 # rpc peer
 rpc-peer=34.241.60.196
+# auto upgrade
+check_script=upgrade/ubuntu.sh
+auto_update=true
 EOF
 
 esac

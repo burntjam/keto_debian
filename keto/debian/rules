@@ -25,6 +25,7 @@ auto_install-stamp:
 	mkdir -p $(TMP)/usr/share/man/man1/
 	mkdir -p $(TMP)/usr/share/man/man8/
 	cp -rf $(CURDIR)/opt $(TMP)/.
+	cp -rf $(CURDIR)/etc $(TMP)/.
 	set +e; \
 	find ./debian/keto/ -type f -print0 \
 	| xargs -0 --no-run-if-empty chrpath -k 2>/dev/null \

@@ -17,6 +17,7 @@ function build {
     mkdir -p keto/opt/keto/log
     mkdir -p keto/opt/keto/keys
     mkdir -p keto/opt/keto/shared
+    mkdir -p keto/opt/keto/upgrade
 
     sed "s/VERSION_TAG/$KETO_VERSION/g" keto/resources/debian/control > keto/debian/control
     sed "s/VERSION_TAG/$KETO_VERSION/g" keto/resources/debian/changelog > keto/debian/changelog
@@ -28,6 +29,7 @@ function build {
     cp -f $KETO_BUILD/build/install/shared/* keto/opt/keto/shared/.
     cp -rf $KETO_BUILD/build/install/keys/* keto/opt/keto/keys/.
     cp -rf $KETO_BUILD/build/install/document_root/* keto/opt/keto/document_root/.
+    cp -rf $KETO_BUILD/build/install/upgrade/* keto/opt/keto/upgrade/.
 
     cd keto && fakeroot debian/rules binary && cd ../
 
@@ -40,6 +42,8 @@ function build {
 
     s3cmd --acl-public --recursive put $KETO_VERSION s3://keto-release/linux/ubuntu/
     s3cmd --acl-public --recursive put latest_version.txt s3://keto-release/linux/ubuntu/
+    echo "Clean up the version"
+    rm -rf $KETO_VERSION
 }
 
 
@@ -49,6 +53,7 @@ function clean {
     rm -rf keto/opt/keto/shared
     rm -rf keto/opt/keto/keys
     rm -rf keto/opt/keto/document_root
+    rm -rf keto/opt/keto/upgrade
 }
 
 
