@@ -48,4 +48,7 @@ check_script=upgrade/ubuntu.sh
 auto_update=true
 EOF
 
+# enable ketod
+systemctl enable ketod
+
 esac
