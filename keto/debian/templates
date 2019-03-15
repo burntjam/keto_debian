@@ -3,3 +3,11 @@ Template: keto/account_hash
 Type: string
 Description: Please provide the account hash for this instance:
 
+Template: keto/private_key
+Type: string
+Description: Please provide the private key for this instance:
+
+Template: keto/public_key
+Type: string
+Description: Please provide the public key for this instance:
+
