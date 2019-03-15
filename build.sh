@@ -17,15 +17,19 @@ function build {
     mkdir -p keto/opt/keto/log
     mkdir -p keto/opt/keto/keys
     mkdir -p keto/opt/keto/shared
+    mkdir -p keto/opt/keto/upgrade
 
     sed "s/VERSION_TAG/$KETO_VERSION/g" keto/resources/debian/control > keto/debian/control
     sed "s/VERSION_TAG/$KETO_VERSION/g" keto/resources/debian/changelog > keto/debian/changelog
     sed -i "s/DATE_TAG/$KETO_DATE/g" keto/debian/changelog
+    echo "$KETO_VERSION" > keto/opt/keto/config/keto_version
+    echo "1" > keto/opt/keto/config/auto_upgrade
 
     cp -f $KETO_BUILD/build/install/bin/* keto/opt/keto/bin/.
     cp -f $KETO_BUILD/build/install/shared/* keto/opt/keto/shared/.
     cp -rf $KETO_BUILD/build/install/keys/* keto/opt/keto/keys/.
     cp -rf $KETO_BUILD/build/install/document_root/* keto/opt/keto/document_root/.
+    cp -rf $KETO_BUILD/build/install/upgrade/* keto/opt/keto/upgrade/.
 
     cd keto && fakeroot debian/rules binary && cd ../
 
@@ -34,8 +38,12 @@ function build {
     mkdir $KETO_VERSION
     mv -f keto_${KETO_VERSION}_all.deb $KETO_VERSION
     mv -f keto_shared_$KETO_VERSION.tar.gz $KETO_VERSION
+    echo "$KETO_VERSION" > latest_version.txt
 
-    s3cmd --acl-public --recursive put $KETO_VERSION s3://keto-release/
+    s3cmd --acl-public --recursive put $KETO_VERSION s3://keto-release/linux/ubuntu/
+    s3cmd --acl-public --recursive put latest_version.txt s3://keto-release/linux/ubuntu/
+    echo "Clean up the version"
+    rm -rf $KETO_VERSION
 }
 
 
@@ -45,6 +53,7 @@ function clean {
     rm -rf keto/opt/keto/shared
     rm -rf keto/opt/keto/keys
     rm -rf keto/opt/keto/document_root
+    rm -rf keto/opt/keto/upgrade
 }
 
 

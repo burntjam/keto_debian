@@ -1,0 +1,5 @@
+[Unit]
+Description=ketod
+[Service]
+ExecStart=/opt/keto/bin/ketod.sh
+PrivateTmp=true
