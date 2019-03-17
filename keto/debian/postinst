@@ -6,36 +6,44 @@ set -e
 
 echo "Hello world"
 
-declare -A KEYMAP
+#declare -A KEYMAP
 
-getAccountInfo() {
-    KEY_DATA=$(/opt/keto/bin/keto_cli.sh -A | awk -F"[{}]" '{print $2}')
-
-    #set -f                      # avoid globbing (expansion of *).
-    array=(${KEY_DATA//,/ })
-    for i in "${!array[@]}"
-    do
-        key_value=(${array[i]//:/ })
-        echo "$i=>${key_value[0]} : ${key_value[1]}"
-        key=${key_value[0]//\"}
-        value=${key_value[1]//\"}
-        db_set keto/${key} $value
-        #db_get keto/${key} && value="$RET"
-        db_input high keto/${key}
-        db_go || true
-
-        db_get keto/${key}
-        KEYMAP[${key}]="$RET"
-
-    done
-}
+#getAccountInfo() {
+#    KEY_DATA=$(/opt/keto/bin/keto_cli.sh -A | awk -F"[{}]" '{print $2}')
+#
+#    #set -f                      # avoid globbing (expansion of *).
+#    array=(${KEY_DATA//,/ })
+#    for i in "${!array[@]}"
+#    do
+#        key_value=(${array[i]//:/ })
+#        echo "$i=>${key_value[0]} : ${key_value[1]}"
+#        key=${key_value[0]//\"}
+#        value=${key_value[1]//\"}
+#        db_set keto/${key} $value
+#        #db_get keto/${key} && value="$RET"
+#        db_input high keto/${key}
+#        db_go || true
+#
+#        db_get keto/${key}
+#        KEYMAP[${key}]="$RET"
+#
+#    done
+#}
 
 #db_get keto/account_hash && account_hash="$RET"
 
 case "$1" in
       configure)
-        getAccountInfo
+        #getAccountInfo
         KETO_CONFIG=/opt/keto/config/config.ini
+        declare -A KEYMAP
+        db_get keto/account_hash
+        KEYMAP[account_hash]="$RET"
+        db_get keto/private_key
+        KEYMAP[private_key]="$RET"
+        db_get keto/public_key
+        KEYMAP[public_key]="$RET"
+
 
         cat << EOF >> $KETO_CONFIG
 base-data-dir= var/db
