@@ -9,7 +9,7 @@ echo "Hello world"
 declare -A KEYMAP
 
 getAccountInfo() {
-    KEY_DATA=$(./build/install/bin/keto_cli.sh -A | awk -F"[{}]" '{print $2}')
+    KEY_DATA=$(/opt/keto/bin/keto_cli.sh -A | awk -F"[{}]" '{print $2}')
 
     #set -f                      # avoid globbing (expansion of *).
     array=(${KEY_DATA//,/ })

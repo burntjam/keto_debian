@@ -4,17 +4,17 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-while :; do
-  RET=""
-  db_input high keto/account_hash || true
-  db_go
-  db_get keto/account_hash
-  # if password isn't empty we ask for password verification
-  if [ ! -z "$RET" ]; then
-    db_fset keto/account_hash seen true
-    ACCOUNT_HASH=$RET
-    break
-  fi
-  db_set keto/account_hash ""
-  db_go
-done
+#while :; do
+#  RET=""
+#  db_input high keto/account_hash || true
+#  db_go
+#  db_get keto/account_hash
+#  # if password isn't empty we ask for password verification
+#  if [ ! -z "$RET" ]; then
+#    db_fset keto/account_hash seen true
+#    ACCOUNT_HASH=$RET
+#    break
+#  fi
+#  db_set keto/account_hash ""
+#  db_go
+#done
