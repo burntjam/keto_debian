@@ -56,8 +56,8 @@ account-hash=${KEYMAP["account_hash"]}
 # public key dir
 public-key-dir=keys/ketod/public
 # server public and private key
-server-public-key=${KEYMAP["private_key"]}
-server-private-key=${KEYMAP["public_key"]}
+server-private-key=${KEYMAP["private_key"]}
+server-public-key=${KEYMAP["public_key"]}
 # block chain files
 block_meta_index=data/block_meta_index
 blocks=data/blocks
