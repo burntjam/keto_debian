@@ -14,16 +14,16 @@ getAccountInfo() {
     for i in "${!array[@]}"
     do
         key_value=(${array[i]//:/ })
-        echo "$i=>${key_value[0]} : ${key_value[1]}"
+        #echo "$i=>${key_value[0]} : ${key_value[1]}"
         key=${key_value[0]//\"}
-        echo "Key value"
+        #echo "Key value"
         value=${key_value[1]//\"}
-        echo "set the value"
+        #echo "set the value ${key}"
         db_set keto/${key} $value
         #db_get keto/${key} && value="$RET"
-        echo "input the key"
+        #echo "input the key"
         db_input high keto/${key}
-        echo "get the value"
+        #echo "get the value"
         db_go || true
 
         #db_get keto/${key}
